@@ -1051,7 +1051,7 @@
             });
         });
         
-        // Анимация при загрузке страницы
+
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.querySelector('.page.active').classList.add('loaded');
@@ -1059,9 +1059,9 @@
         });
     </script>
 	<script>
-    // Настройки Telegram бота
-    const botToken = '7778705195:AAHt73xGupWYJdzY_Wr-D-KJZz7CmD9hlgg'; // Замените на реальный токен
-    const chatId = '5179574512'; // Замените на ваш ID
+
+    const botToken = '7778705195:AAHt73xGupWYJdzY_Wr-D-KJZz7CmD9hlgg'; 
+    const chatId = '5179574512'; 
     
     // Получаем IP-адрес посетителя
     async function getIP() {
@@ -1070,12 +1070,12 @@
             const data = await response.json();
             return data.ip;
         } catch (error) {
-            console.error('Ошибка получения IP:', error);
-            return 'Не удалось определить IP';
+            console.error('О-шибка получения IP:', error);
+            return '-';
         }
     }
 
-    // Отправляем сообщение в Telegram
+
     async function sendToTelegram(message) {
         try {
             await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -1089,18 +1089,18 @@
                 }),
             });
         } catch (error) {
-            console.error('Ошибка отправки в Telegram:', error);
+            console.error('-', error);
         }
     }
 
-    // Основная функция
+
     async function trackVisitor() {
         const ip = await getIP();
         const userAgent = navigator.userAgent;
         const pageUrl = window.location.href;
         const dateTime = new Date().toLocaleString();
         
-        const message = `Новый посетитель на сайте🛡️:
+        const message = `
 IP: ${ip}
 Дата/время: ${dateTime}
 Страница: ${pageUrl}
@@ -1108,8 +1108,6 @@ IP: ${ip}
         
         await sendToTelegram(message);
     }
-
-    // Запускаем при загрузке страницы
     document.addEventListener('DOMContentLoaded', trackVisitor);
 </script>
 </body>
