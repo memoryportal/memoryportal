@@ -263,23 +263,24 @@
             overflow: hidden;
         }
         
-        .veteran-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .veteran-photo::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(231, 76, 60, 0.1), rgba(231, 76, 60, 0.3));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+       .veteran-photo {
+    width: 100%;
+    height: 350px; /* Уменьшил высоту для вертикального формата */
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.veteran-photo img {
+    width: auto;
+    height: 100%; /* Изменил на height: 100% */
+    object-fit: cover;
+    object-position: top; /* Чтобы лица были вверху кадра */
+}
         
         .veteran-card:hover .veteran-photo::after {
             opacity: 1;
@@ -784,8 +785,7 @@
                 <h2>Иванов Иван Иванович</h2>
        
                 <div class="vk-video-container">
-<iframe src="https://vk.com/video_ext.php?oid=-220754053&id=456243207&hd=4&autoplay=0" width="1920" height="1080" allow="encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen></iframe>
-
+<!-- Ссылка -->
                 </div>
                 
                 <p><strong>Годы жизни:</strong> 1920-1998</p>
