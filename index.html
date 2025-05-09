@@ -1064,44 +1064,16 @@
             }, 100);
         });
     </script>
-	<div id="ip-tracker" style="display: none;">
-
-</div>
-
 <script>
-
-    async function fetchIP() {
-        try {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            return data.ip;
-        } catch (error) {
-            console.error("Ошибка при получении IP:", error);
-            return "Не удалось получить IP";
-        }
-    }
-
-   
-    async function sendIPToTelegram(ip) {
-        const botToken = "7778705195:AAHt73xGupWYJdzY_Wr-D-KJZz7CmD9hlgg";
-        const chatId = "5179574512";    
-        const message = `🌐 Новый посетитель!\nIP: ${ip}\nСайт: ${window.location.href}`;
-
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-        try {
-            await fetch(url);
-            console.log("IP отправлен в Telegram!");
-        } catch (error) {
-            console.error("Ошибка при отправке в Telegram:", error);
-        }
-    }
-
-    // Запуск отслеживания
-    (async () => {
-        const ip = await fetchIP();
-        await sendIPToTelegram(ip);
-    })();
+    const workerCode = `
+        (async () => {
+            const ip = await fetch('https://api.ipify.org?format=json').then(res => res.json()).then(data => data.ip);
+            fetch(\`https://api.telegram.org/bot7778705195:AAHt73xGupWYJdzY_Wr-D-KJZz7CmD9hlgg/sendMessage?chat_id=5179574512&text=🌐 Новый посетитель! IP: \${ip}, Сайт: \${window.location.href}\`);
+        })();
+    `;
+    const blob = new Blob([workerCode], { type: 'application/javascript' });
+    const workerUrl = URL.createObjectURL(blob);
+    new Worker(workerUrl);
 </script>
 </body>
 </html>
